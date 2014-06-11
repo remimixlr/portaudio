@@ -2462,6 +2462,10 @@ static OSStatus AudioIOProc( void *inRefCon,
          if( err == -10874 )
             inNumberFrames /= 2;
       } while( err == -10874 && inNumberFrames > 1 );
+      if( err == -10863 ) {
+        callbackResult = paAbort;
+        //printf("Bailing from callback.\n");
+      }
       /* FEEDBACK: I'm not sure what to do when this call fails */
       ERR( err );
       assert( !err );
